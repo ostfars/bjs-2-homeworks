@@ -19,6 +19,21 @@ function solveEquation(a, b, c) {
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
 
+  // let parameters = [percent, contribution, amount, date];
+  // for (let i = 0; i < parameters.length; i++) {
+  //   let parameter
+  //   if (Number(parameters[i] == NaN)) {
+  //     switch (parameters[i]) {
+  //       case percent:
+  //         parameter = 'Процентная ставка'
+          
+  //         break
+      
+  //     }  
+      
+  //   }
+  // }
+
   // код для задачи №2 писать здесь
 
   return totalAmount;
