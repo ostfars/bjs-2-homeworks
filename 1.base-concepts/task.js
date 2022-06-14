@@ -19,22 +19,17 @@ function solveEquation(a, b, c) {
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
 
-  // let parameters = [percent, contribution, amount, date];
-  // for (let i = 0; i < parameters.length; i++) {
-  //   let parameter
-  //   if (Number(parameters[i] == NaN)) {
-  //     switch (parameters[i]) {
-  //       case percent:
-  //         parameter = 'Процентная ставка'
-          
-  //         break
-      
-  //     }  
-      
-  //   }
-  // }
+  // parameters check
 
+  if (!Number(+percent)) {
+    totalAmount = `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`
+  } else if (!Number(+contribution)) {
+    totalAmount = `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`
+  } else if (!Number(+amount)) {
+    totalAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`
+  }
+    
   // код для задачи №2 писать здесь
-
+  
   return totalAmount;
 }
