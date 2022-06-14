@@ -18,18 +18,30 @@ function solveEquation(a, b, c) {
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
-
+  
   // parameters check
 
-  if (!Number(+percent)) {
+  if (!+percent) {
     totalAmount = `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`
-  } else if (!Number(+contribution)) {
+  } else if (!+contribution && contribution !=0) {
     totalAmount = `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`
-  } else if (!Number(+amount)) {
+  } else if (!+amount) {
     totalAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`
-  }
-    
-  // код для задачи №2 писать здесь
+  } else {
   
-  return totalAmount;
+  // credit calculation
+
+    let body = amount - contribution,
+        rate = percent / 100,
+        monthlyRate = rate / 12,
+        currentDate = new Date();
+    
+    let term = ((date.getFullYear() - currentDate.getFullYear()) * 12) + (date.getMonth() - currentDate.getMonth());
+    
+    let monthlyPayment = body * (monthlyRate + (monthlyRate / (((1 + monthlyRate)**term) - 1)));
+    
+    totalAmount = +(monthlyPayment * term).toFixed(2);
+  }
+
+  return totalAmount
 }
