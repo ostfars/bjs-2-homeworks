@@ -19,7 +19,10 @@ function compareArrays(arr1, arr2) {
 // const compareArrays = (arr1, arr2) => arr1.length === arr2.length && arr1.every((item, i) => item === arr2[i])
 
 function advancedFilter(arr) {
-  let resultArr;
+  let resultArr = arr
+    .filter((number) => number >= 0)
+    .filter((number) => number % 3 === 0)
+    .map((number) => number * 10)
 
   // Ваш код
 
