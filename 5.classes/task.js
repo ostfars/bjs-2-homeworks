@@ -93,7 +93,7 @@ class Library {
     for (let i = 0; i < this.books.length; i++) {
       if (this.books[i].name === bookName) {
         result = this.books[i];
-        this.books.splice(i, i + 1);
+        this.books.splice(i, 1);
       } 
     }
     return result;
@@ -101,3 +101,48 @@ class Library {
 }
 
 // Task #3
+
+class Student {
+  constructor(name, gender, age) {
+    this.name = name;
+    this.gender = gender;
+    this.age = age;
+    this.subjects = {};
+    this.isExcluded = '';
+  }
+
+  addMark(mark, subject) {
+    if (mark < 1 || mark >5) {
+      return 'Ошибка, оценка должна быть числом от 1 до 5'
+    } else {
+      if (this.subjects[subject] === undefined) {
+        this.subjects[subject] = [mark];
+      } else {
+        this.subjects[subject].push(mark);
+      }
+    }
+  }
+
+  getAverageBySubject(subject) {
+    let result;
+    if (this.subjects[subject] === undefined) {
+      return 'Несуществующий предмет'
+    } else {
+      result = this.subjects[subject].reduce((a, b) => a + b, 0) / this.subjects[subject].length;
+    }
+    return result;
+  }
+    
+  getAverage() {
+    const averages = [];
+    for (let subject in this.subjects) {
+      averages.push(this.getAverageBySubject(subject))
+    }
+    return averages.reduce((a, b) => a + b, 0) / averages.length;
+  }
+
+  exclude(reason) {
+    this.isExcluded = reason;
+    return reason;
+  }
+}
