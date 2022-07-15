@@ -5,16 +5,21 @@ class AlarmClock {
   }
 
   addClock(time, fn, id) {
-    
-    if (this.id == 'undefined') {
-      throw new Error('Невозможно идентифицировать будильник. Параметр id на передан.')
-    }
-    
-    this.id = id;
-    this.time = time;
-    this.callback = fn;
 
-    this.alarmCollection.push(this.addClock)
+    const newClock = {};
+
+    if (id === undefined) {
+      throw new Error('Невозможно идентифицировать будильник. Параметр id не передан.')
+    }
+    if (this.alarmCollection.filter(alarm => alarm.id === id).length !== 0) {
+      return console.error('Будильник с таким id уже существует')
+    }
+
+    newClock.id = id;
+    newClock.time = time;
+    newClock.callback = fn;
+
+    this.alarmCollection.push(newClock)
   }
 
   removeClock(id) {
@@ -23,10 +28,11 @@ class AlarmClock {
 
   getCurrentFormattedTime() {
     const currentDate = new Date();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes(); 
 
-    console.log(`${hours}:${minutes}`)
+    const hours = currentDate.getHours() < 10 ? `0${currentDate.getHours()}` : `${currentDate.getHours()}`;
+    const minutes = currentDate.getMinutes() < 10 ? `0${currentDate.getMinutes()}` : `${currentDate.getMinutes()}`;
+    
+    return `${hours}:${minutes}`
   }
 
   start() {
@@ -55,4 +61,5 @@ console.log(alarm01)
 const alarm02 = new AlarmClock('14:14', 'Rise and shine!!!')
 alarm02.addClock('14:14', 'Rise and shine!!!')
 console.log(alarm02)
+console.log(alarm01.getCurrentFormattedTime())
 
