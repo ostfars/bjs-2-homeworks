@@ -47,7 +47,8 @@ class AlarmClock {
   }
 
   printAlarms() {
-
+    console.log(`Печать всех будильников в количестве ${this.alarmCollection.length}`)
+    this.alarmCollection.forEach((item) => console.log(`Будильник №${item.id} заведен на ${item.time}`))
   }
 
   clearAlarms() {
