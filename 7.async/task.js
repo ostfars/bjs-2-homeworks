@@ -11,7 +11,7 @@ class AlarmClock {
     if (id === undefined) {
       throw new Error('Невозможно идентифицировать будильник. Параметр id не передан.')
     }
-    if (this.alarmCollection.filter(alarm => alarm.id === id).length !== 0) {
+    if (this.alarmCollection.some(alarm => alarm.id === id)) {
       return console.error('Будильник с таким id уже существует')
     }
 
@@ -23,8 +23,11 @@ class AlarmClock {
   }
 
   removeClock(id) {
+    const lengthBefore = this.alarmCollection.length
+    this.alarmCollection = this.alarmCollection.filter(alarm => alarm.id !== id)
+    const lengthAfter = this.alarmCollection.length
 
-  }
+    console.log(lengthBefore !== lengthAfter)  }
 
   getCurrentFormattedTime() {
     const currentDate = new Date();
