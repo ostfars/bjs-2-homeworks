@@ -39,11 +39,25 @@ class AlarmClock {
   }
 
   start() {
+    const checkClock = (clock) => {
+      if (clock.time === this.getCurrentFormattedTime()) {
+        console.log(clock.callback)
+      } else {
+        console.log('Not yet')
+      }
+    }
 
+    if (this.timerId === null) {
+      this.timerId = setInterval(() => this.alarmCollection.forEach((item) => checkClock(item)), 10000);
+      
+    }
   }
 
   stop() {
-
+    if (this.timerId !== null) {
+      clearInterval(this.timerId);
+      this.timerId = null;
+    }
   }
 
   printAlarms() {
@@ -52,7 +66,8 @@ class AlarmClock {
   }
 
   clearAlarms() {
-
+    this.stop();
+    this.alarmCollection = [];
   }
 
 }
@@ -60,10 +75,20 @@ class AlarmClock {
 // test
 
 const alarm01 = new AlarmClock()
-alarm01.addClock('11:11', 'Wake up, Neo', 1)
-console.log(alarm01)
-const alarm02 = new AlarmClock('14:14', 'Rise and shine!!!')
-alarm02.addClock('14:14', 'Rise and shine!!!')
-console.log(alarm02)
-console.log(alarm01.getCurrentFormattedTime())
 
+alarm01.addClock(`${alarm01.getCurrentFormattedTime()}`, 'Wake up, Neo', 1)
+alarm01.addClock(`${alarm01.getCurrentFormattedTime()}`, 'Rise and shine', 2)
+alarm01.addClock('13:13', 'Goog morning', 1)
+alarm01.addClock('15:15', 'I got you babe', 3)
+
+console.log(alarm01);
+alarm01.printAlarms();
+
+alarm01.removeClock(1);
+
+console.log(alarm01);
+console.log(alarm01.getCurrentFormattedTime())
+alarm01.printAlarms();
+alarm01.start()
+console.log(alarm01);
+// alarm01.stop()
