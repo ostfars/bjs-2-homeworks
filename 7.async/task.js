@@ -42,13 +42,11 @@ class AlarmClock {
     const checkClock = (clock) => {
       if (clock.time === this.getCurrentFormattedTime()) {
         console.log(clock.callback)
-      } else {
-        console.log('Not yet')
-      }
+      } 
     }
 
     if (this.timerId === null) {
-      this.timerId = setInterval(() => this.alarmCollection.forEach((item) => checkClock(item)), 10000);
+      this.timerId = setInterval(() => this.alarmCollection.forEach((item) => checkClock(item)), 1000);
       
     }
   }
@@ -74,21 +72,25 @@ class AlarmClock {
 
 // test
 
-const alarm01 = new AlarmClock()
+const testCase = () => {
+  const alarm01 = new AlarmClock()
 
-alarm01.addClock(`${alarm01.getCurrentFormattedTime()}`, 'Wake up, Neo', 1)
-alarm01.addClock(`${alarm01.getCurrentFormattedTime()}`, 'Rise and shine', 2)
-alarm01.addClock('13:13', 'Goog morning', 1)
-alarm01.addClock('15:15', 'I got you babe', 3)
+  alarm01.addClock(`${alarm01.getCurrentFormattedTime()}`, 'Rise and shine', 1)
+  // alarm01.addClock(`${alarm01.getCurrentFormattedTime()}`, 'Rise and shine')
+  alarm01.addClock(`${alarm01.getCurrentFormattedTime()}`, 'Wake up, Neo', 2)
+  alarm01.addClock('13:13', 'Goog morning', 1)
+  alarm01.addClock('15:15', 'I got you babe', 3)
 
-console.log(alarm01);
-alarm01.printAlarms();
+  console.log(alarm01);
+  alarm01.printAlarms();
 
-alarm01.removeClock(1);
+  alarm01.removeClock(1);
 
-console.log(alarm01);
-console.log(alarm01.getCurrentFormattedTime())
-alarm01.printAlarms();
-alarm01.start()
-console.log(alarm01);
-// alarm01.stop()
+  console.log(alarm01);
+  console.log(alarm01.getCurrentFormattedTime())
+  alarm01.printAlarms();
+  alarm01.start()
+  console.log(alarm01);
+  // alarm01.stop()
+}
+testCase()
